@@ -1,0 +1,30 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches:
+      - main  # Запускаем тесты при пуше в основную ветку
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]  # Два runner'а: Ubuntu и Windows
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Клонируем репозиторий
+
+    - name: Setup Python
+      uses: actions/setup-python@v4  # Устанавливаем Python
+      with:
+        python-version: 3.x  # Указываем версию Python (3.x для поддержки unittest)
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt || true  # Установить зависимости, если есть файл requirements.txt
+
+    - name: Run Unit Tests
+      run: |
+        python3 -m unittest discover -s . -p "test_*.py"
