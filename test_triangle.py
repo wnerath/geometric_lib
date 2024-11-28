@@ -4,7 +4,7 @@ from triangle import area, perimeter
 class TestTriangleFunctions(unittest.TestCase):
     def test_area_positive(self):
         # Тест площади треугольника с положительными основанием и высотой
-        self.assertAlmostEqual(area(4, 5), 10.0)
+        self.assertAlmostEqual(area(0, 5), 10.0)
         self.assertAlmostEqual(area(10, 2), 10.0)
         self.assertAlmostEqual(area(3.5, 6), 10.5)
 
